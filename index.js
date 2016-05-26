@@ -6,7 +6,7 @@ module.exports = src => {
   const files = [];
   $('table').find('tr').slice(2, -1).each((_, tr) => {
     const $tds = $(tr).find('td');
-    const path = $tds.eq(1).children().eq(0).text();
+    const path = $tds.eq(1).children().eq(0).attr('href');
     files.push({
       type: path[path.length - 1] == '/'
         ? 'directory'
