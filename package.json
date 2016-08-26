@@ -4,7 +4,13 @@
   "license": "MIT",
   "repository": "juliangruber/parse-apache-directory-index",
   "description": "Parse an HTML Apache directory index",
+  "scripts": {
+    "test": "mocha --recursive test/spec"
+  },
   "dependencies": {
     "cheerio": "^0.20.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2"
   }
 }
