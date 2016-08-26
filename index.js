@@ -30,5 +30,5 @@ module.exports = src => {
     });
   });
   return { dir, files };
-}
+};
 
