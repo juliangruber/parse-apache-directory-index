@@ -16,6 +16,7 @@ describe('parseApacheDirectoryIndex', () => {
           name: 'folderA/',
           type: 'directory',
           path: '/foo/bar/folderA/',
+          relPath: 'folderA/',
           description: 'The very first folder',
           size: null,
           lastModified: new Date('25-May-2016 11:53')
@@ -24,6 +25,7 @@ describe('parseApacheDirectoryIndex', () => {
           name: 'folderB/',
           type: 'directory',
           path: '/foo/bar/folderB/',
+          relPath: 'folderB/',
           size: 5662310.4,
           lastModified: new Date('19-May-2016 17:57'),
           description: ''
@@ -32,6 +34,7 @@ describe('parseApacheDirectoryIndex', () => {
           name: 'fileA.zip',
           type: 'file',
           path: '/foo/bar/fileA.zip',
+          relPath: 'fileA.zip',
           size: 57344,
           lastModified: new Date('28-May-2009 15:09'),
           description: ''
@@ -40,6 +43,7 @@ describe('parseApacheDirectoryIndex', () => {
           name: 'fileB.zip',
           type: 'file',
           path: '/foo/bar/fileB.zip',
+          relPath: 'fileB.zip',
           size: 662528,
           lastModified: new Date('28-May-2009 17:32'),
           description: ''

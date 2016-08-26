@@ -36,6 +36,7 @@ module.exports = src => {
         type: filePath.endsWith('/') ? 'directory' : 'file',
         name: $name.text().trim(),
         path: path.join(dir, filePath),
+        relPath: filePath,
         lastModified: new Date($lastMod.text().trim()),
         size: bytes($size.text()),
         description: $descr.text().trim()
