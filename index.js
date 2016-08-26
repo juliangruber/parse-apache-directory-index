@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const path = require('path');
 
 const bytes = (str) => {
   const m = /^\s*([0-9.]+)([A-Z]*)\s*$/.exec(str);
@@ -14,21 +15,33 @@ const bytes = (str) => {
 module.exports = src => {
   const $ = cheerio.load(src);
   const dir = '/' + $('h1').text().split('/').slice(1).join('/');
-  const files = [];
-  $('table').find('tr').slice(2, -1).each((_, tr) => {
-    const $tds = $(tr).find('td');
-    const path = $tds.eq(1).children().eq(0).attr('href');
-    files.push({
-      type: path[path.length - 1] == '/'
-        ? 'directory'
-        : 'file',
-      name: path.slice(0, path.length - 1),
-      path: `${dir}/${path}`,
-      lastModified: new Date($tds.eq(2).text().trim()),
-      size: bytes($tds.eq(3).text()),
-      description: $tds.eq(4).text(),
+  
+  const rows = $('table').find('tr').toArray();
+  const files = rows
+    .filter(tr => (
+      $(tr).find('td').length === 5 &&
+      !(/Parent Directory/i.test($(tr).text()))
+    ))
+    .map(tr => {
+      const $tds = $(tr).find('td');
+
+      const $name = $tds.eq(1);
+      const $lastMod = $tds.eq(2);
+      const $size = $tds.eq(3);
+      const $descr = $tds.eq(4);
+
+      const filePath = $name.children('a').eq(0).attr('href');
+
+      return {
+        type: filePath.endsWith('/') ? 'directory' : 'file',
+        name: $name.text().trim(),
+        path: path.join(dir, filePath),
+        lastModified: new Date($lastMod.text().trim()),
+        size: bytes($size.text()),
+        description: $descr.text().trim()
+      };
     });
-  });
+
   return { dir, files };
 };
 
