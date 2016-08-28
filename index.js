@@ -19,11 +19,13 @@ module.exports = src => {
   $('table').find('tr').slice(2, -1).each((_, tr) => {
     const $tds = $(tr).find('td');
     const path = $tds.eq(1).children().eq(0).attr('href');
+    const name = $tds.eq(1).text().trim();
+
     files.push({
       type: path[path.length - 1] === '/'
         ? 'directory'
         : 'file',
-      name: path.slice(0, path.length - 1),
+      name: name,
       path: join(dir, path),
       lastModified: new Date($tds.eq(2).text().trim()),
       size: bytes($tds.eq(3).text()),
