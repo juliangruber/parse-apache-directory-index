@@ -16,10 +16,12 @@ module.exports = src => {
   const $ = cheerio.load(src);
   const dir = '/' + $('h1').text().split('/').slice(1).join('/');
   const files = [];
-  $('table').find('tr').slice(2, -1).each((_, tr) => {
+
+  $('table').find('tr').each((_, tr) => {
     const $tds = $(tr).find('td');
     const path = $tds.eq(1).children().eq(0).attr('href');
     const name = $tds.eq(1).text().trim();
+    if (name === 'Parent Directory' || $tds.length !== 5) return;
 
     files.push({
       type: path[path.length - 1] === '/'
@@ -32,6 +34,7 @@ module.exports = src => {
       description: $tds.eq(4).text()
     });
   });
+
   return { dir, files };
 };
 
