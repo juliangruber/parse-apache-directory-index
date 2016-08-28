@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const join = require('path').join;
 
 const bytes = (str) => {
   const m = /^\s*([0-9.]+)([A-Z]*)\s*$/.exec(str);
@@ -23,7 +24,7 @@ module.exports = src => {
         ? 'directory'
         : 'file',
       name: path.slice(0, path.length - 1),
-      path: `${dir}/${path}`,
+      path: join(dir, path),
       lastModified: new Date($tds.eq(2).text().trim()),
       size: bytes($tds.eq(3).text()),
       description: $tds.eq(4).text()
