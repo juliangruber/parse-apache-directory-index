@@ -4,7 +4,13 @@
   "license": "MIT",
   "repository": "juliangruber/parse-apache-directory-index",
   "description": "Parse an HTML Apache directory index",
+  "scripts": {
+    "test": "semistandard"
+  },
   "dependencies": {
     "cheerio": "^0.20.0"
+  },
+  "devDependencies": {
+    "semistandard": "^8.0.0"
   }
 }
