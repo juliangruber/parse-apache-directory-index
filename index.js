@@ -31,7 +31,7 @@ module.exports = src => {
       path: join(dir, path),
       lastModified: new Date($tds.eq(2).text().trim()),
       size: bytes($tds.eq(3).text()),
-      description: $tds.eq(4).text()
+      description: $tds.eq(4).text().trim()
     });
   });
 
