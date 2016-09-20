@@ -2,8 +2,8 @@ const parse = require('..');
 const fs = require('fs');
 const test = require('tap').test;
 
-test(t => {
-  const index = fs.readFileSync(`${__dirname}/fixture.html`, 'utf8');
+test('should parse apache directory index files', t => {
+  const index = fs.readFileSync(`${__dirname}/fixture/apache-index.html`, 'utf8');
 
   t.deepEqual(parse(index), {
     dir: '/foo/bar',
