@@ -20,7 +20,7 @@ test('should parse apache directory index files', t => {
         name: 'folderB/',
         type: 'directory',
         path: '/foo/bar/folderB/',
-        size: null,
+        size: 5662310.4,
         lastModified: new Date('19-May-2016 17:57'),
         description: ''
       },
@@ -28,7 +28,7 @@ test('should parse apache directory index files', t => {
         name: 'fileA.zip',
         type: 'file',
         path: '/foo/bar/fileA.zip',
-        size: 5662310.4,
+        size: 57344,
         lastModified: new Date('28-May-2009 15:09'),
         description: ''
       },
