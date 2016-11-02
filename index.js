@@ -33,7 +33,7 @@ module.exports = src => {
 
   // Make sure we at least found a "Name" column
   if (fieldCols['Name'] === undefined) {
-    throw new Error(`Unable to parse apache index html: cannot identify "Name" column.`);
+    throw new Error('Unable to parse apache index html: cannot identify "Name" column.');
   }
 
   // Parse fields

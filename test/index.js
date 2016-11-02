@@ -65,7 +65,7 @@ test('should parse apache directory index files (alt format)', t => {
         path: '/foo/bar/folderB/',
         size: null,
         lastModified: new Date('20-Sep-2016 20:33'),
-        description: null,
+        description: null
       },
       {
         name: 'fileA.zip',
