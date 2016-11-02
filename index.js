@@ -17,23 +17,51 @@ module.exports = src => {
   const dir = '/' + $('h1').text().split('/').slice(1).join('/');
   const files = [];
 
-  $('table').find('tr').each((_, tr) => {
-    const $tds = $(tr).find('td');
-    const path = $tds.eq(1).children().eq(0).attr('href');
-    const name = $tds.eq(1).text().trim();
-    if (name === 'Parent Directory' || $tds.length !== 5) return;
+  const rows = $('table').children('tr').toArray();
 
-    files.push({
-      type: path[path.length - 1] === '/'
-        ? 'directory'
-        : 'file',
-      name: name,
-      path: join(dir, path),
-      lastModified: new Date($tds.eq(2).text().trim()),
-      size: bytes($tds.eq(3).text()),
-      description: $tds.eq(4).text().trim()
+  // Figure out the order of the columns,
+  // by looking at the header row.
+  // eg { 'Name': 0, 'Last modified': 1, 'Size': 2 }
+  const fieldCols = $(rows[0])
+    .children('th')
+    .toArray()
+    .reduce((fieldCols, th, i) =>
+        Object.assign(fieldCols, {
+          [$(th).text().trim()]: i
+        }),
+      {});
+
+  // Make sure we at least found a "Name" column
+  if (fieldCols['Name'] === undefined) {
+    throw new Error('Unable to parse apache index html: cannot identify "Name" column.');
+  }
+
+  // Parse fields
+  rows
+    // Ignore the header row
+    .slice(1)
+    .forEach((tr) => {
+      const $tds = $(tr).find('td');
+      const getCol = label => fieldCols[label] === undefined ? null : $tds.eq(fieldCols[label]);
+      const getColText = label => getCol(label) && getCol(label).text().trim();
+
+      const path = getCol('Name').children().eq(0).attr('href');
+      const name = getColText('Name');
+
+      // Ignore 'Parent Directory' row
+      if (name === 'Parent Directory' || !name) return;
+
+      files.push({
+        type: path.endsWith('/')
+          ? 'directory'
+          : 'file',
+        name: name,
+        path: join(dir, path),
+        lastModified: getCol('Last modified') && new Date(getColText('Last modified')),
+        size: getCol('Size') && bytes(getColText('Size')),
+        description: getColText('Description')
+      });
     });
-  });
 
   return { dir, files };
 };
