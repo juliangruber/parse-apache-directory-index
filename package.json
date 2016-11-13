@@ -8,10 +8,10 @@
     "test": "tap test/*.js && semistandard"
   },
   "dependencies": {
-    "cheerio": "^0.20.0"
+    "cheerio": "^0.22.0"
   },
   "devDependencies": {
-    "semistandard": "^8.0.0",
-    "tap": "^7.0.0"
+    "semistandard": "^9.1.0",
+    "tap": "^8.0.0"
   }
 }
