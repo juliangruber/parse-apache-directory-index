@@ -1,5 +1,5 @@
 const cheerio = require('cheerio');
-const join = require('path').join;
+const join = require('path').posix.join;
 
 const bytes = (str) => {
   const m = /^\s*([0-9.]+)([A-Z]*)\s*$/.exec(str);
