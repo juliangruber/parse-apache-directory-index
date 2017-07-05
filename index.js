@@ -17,7 +17,7 @@ module.exports = src => {
   const dir = '/' + $('h1').text().split('/').slice(1).join('/');
   const files = [];
 
-  const rows = $('table').children('tr').toArray();
+  const rows = $('table').find('tr').toArray();
 
   // Figure out the order of the columns,
   // by looking at the header row.
