@@ -6,10 +6,13 @@ const bytes = (str) => {
   if (!m) return null;
   const num = Number(m[1]);
   const suf = m[2];
-  return suf === 'K' ? num * 1024
-    : suf === 'M' ? num * 1024 * 1024
-    : suf === 'G' ? num * 1024 * 1024 * 1024
-    : num;
+  return suf === 'K'
+    ? num * 1024
+    : suf === 'M'
+      ? num * 1024 * 1024
+      : suf === 'G'
+        ? num * 1024 * 1024 * 1024
+        : num;
 };
 
 module.exports = src => {
@@ -26,13 +29,13 @@ module.exports = src => {
     .children('th')
     .toArray()
     .reduce((fieldCols, th, i) =>
-        Object.assign(fieldCols, {
-          [$(th).text().trim()]: i
-        }),
-      {});
+      Object.assign(fieldCols, {
+        [$(th).text().trim()]: i
+      }),
+    {});
 
   // Make sure we at least found a "Name" column
-  if (fieldCols['Name'] === undefined) {
+  if (fieldCols.Name === undefined) {
     throw new Error('Unable to parse apache index html: cannot identify "Name" column.');
   }
 
@@ -65,4 +68,3 @@ module.exports = src => {
 
   return { dir, files };
 };
-
