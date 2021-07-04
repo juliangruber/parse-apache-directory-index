@@ -2,6 +2,7 @@
 # parse-apache-directory-index
 
 [![test](../../actions/workflows/test.yml/badge.svg)](../../actions/workflows/test.yml)
+[![npm version](https://badge.fury.io/js/parse-apache-directory-index.svg)](https://www.npmjs.com/package/parse-apache-directory-index)
 
 Parse an HTML Apache directory index.
 
