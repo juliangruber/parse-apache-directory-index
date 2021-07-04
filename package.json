@@ -5,13 +5,13 @@
   "repository": "juliangruber/parse-apache-directory-index",
   "description": "Parse an HTML Apache directory index",
   "scripts": {
-    "test": "tap test/*.js && semistandard"
+    "test": "tap --no-check-coverage test/*.js && semistandard"
   },
   "dependencies": {
-    "cheerio": "^0.22.0"
+    "cheerio": "^1.0.0-rc.10"
   },
   "devDependencies": {
-    "semistandard": "^9.1.0",
-    "tap": "^8.0.0"
+    "semistandard": "^16.0.1",
+    "tap": "^15.0.9"
   }
 }
