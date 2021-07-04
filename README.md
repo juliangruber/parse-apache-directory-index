@@ -1,6 +1,8 @@
 
 # parse-apache-directory-index
 
+[![test](../../actions/workflows/test.yml/badge.svg)](../../actions/workflows/test.yml)
+
 Parse an HTML Apache directory index.
 
 ## Usage
