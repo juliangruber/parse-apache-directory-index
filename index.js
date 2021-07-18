@@ -47,19 +47,22 @@ module.exports = src => {
       const $tds = $(tr).find('td');
       const getCol = label => fieldCols[label] === undefined ? null : $tds.eq(fieldCols[label]);
       const getColText = label => getCol(label) && getCol(label).text().trim();
-
-      const path = getCol('Name').children().eq(0).attr('href');
       const name = getColText('Name');
 
       // Ignore 'Parent Directory' row
       if (name === 'Parent Directory' || !name) return;
+
+      let path = getCol('Name').children().eq(0).attr('href');
+      if (!path.startsWith('http://') && !path.startsWith('https://')) {
+        path = join(dir, path);
+      }
 
       files.push({
         type: path.endsWith('/')
           ? 'directory'
           : 'file',
         name: name,
-        path: join(dir, path),
+        path: path,
         lastModified: getCol('Last modified') && new Date(getColText('Last modified')),
         size: getCol('Size') && bytes(getColText('Size')),
         description: getColText('Description')

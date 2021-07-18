@@ -131,3 +131,46 @@ test('should parse apache directory index files (alt format)', t => {
   });
   t.end();
 });
+
+test('Should parse both absolute and relative URLs', t => {
+  const index = fs.readFileSync(join(__dirname, '/fixture/apache-index-absolute-and-relative-urls.html'), 'utf8');
+
+  t.same(parse(index), {
+    dir: '/foo/bar',
+    files: [
+      {
+        name: 'subdir-absolute/',
+        type: 'directory',
+        path: 'https://www.example.org/subdir-absolute/',
+        description: '',
+        size: null,
+        lastModified: new Date('2021-06-30T22:24:50.000Z')
+      },
+      {
+        name: 'subdir-relative/',
+        type: 'directory',
+        path: '/foo/bar/subdir-relative/',
+        size: null,
+        lastModified: new Date('2021-06-30T22:24:50.000Z'),
+        description: ''
+      },
+      {
+        name: 'subfile-absolute.xml',
+        type: 'file',
+        path: 'https://www.example.org/subfile-absolute.xml',
+        size: 25,
+        lastModified: new Date('2021-07-04T16:22:15.000Z'),
+        description: ''
+      },
+      {
+        name: 'subfile-relative.xml',
+        type: 'file',
+        path: '/foo/bar/subfile-relative.xml',
+        size: 25,
+        lastModified: new Date('2021-07-04T16:22:15.000Z'),
+        description: ''
+      }
+    ]
+  });
+  t.end();
+});
