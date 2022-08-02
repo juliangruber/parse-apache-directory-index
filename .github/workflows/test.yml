@@ -18,6 +18,9 @@ jobs:
           - 14
           - 16
           - 18
+        include:
+          - node-version: 14
+            env: --experimental-abortcontroller --no-warnings 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -25,3 +28,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm test
+        env:
+          NODE_OPTIONS: ${{ matrix.env }}
