@@ -170,4 +170,22 @@ test('Should parse both absolute and relative URLs', () => {
       }
     ]
   });
+
+  test('Should parse dir with special chars', () => {
+    const index = fs.readFileSync(join(__dirname, '/fixture/apache-index-special-chars-dir.html'), 'utf8');
+
+    assert.deepStrictEqual(parse(index), {
+      dir: '/Series/100%25%20Physique/Season%201',
+      files: [
+        {
+          name: '100.%.Physique.!.S01E01.MULTi.1080p.WEB.HDR10.H265-TFA.mkv',
+          type: 'file',
+          path: '/Series/100%25%20Physique/Season%201/100.%25.Physique.!.S01E01.MULTi.1080p.WEB.HDR10.H265-TFA.mkv',
+          description: '',
+          size: 2576980377.6,
+          lastModified: new Date('24-Feb-2023 11:44')
+        }
+      ]
+    });
+  });
 });
