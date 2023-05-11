@@ -171,8 +171,8 @@ test('Should parse both absolute and relative URLs', () => {
     ]
   });
 
-  test('Should parse dir with special chars', () => {
-    const index = fs.readFileSync(join(__dirname, '/fixture/apache-index-special-chars-dir.html'), 'utf8');
+  test('Should parse url with special chars', () => {
+    const index = fs.readFileSync(join(__dirname, '/fixture/apache-index-special-chars-url.html'), 'utf8');
 
     assert.deepStrictEqual(parse(index), {
       dir: '/Series/100%25%20Physique/Season%201',
