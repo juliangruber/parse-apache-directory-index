@@ -1,6 +1,6 @@
 {
   "name": "parse-apache-directory-index",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "license": "MIT",
   "repository": "juliangruber/parse-apache-directory-index",
   "description": "Parse an HTML Apache directory index",
