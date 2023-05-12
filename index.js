@@ -17,7 +17,7 @@ const bytes = (str) => {
 
 module.exports = src => {
   const $ = cheerio.load(src);
-  const dir = '/' + $('h1').text().split('/').slice(1).join('/');
+  const dir = encodeURI('/' + $('h1').text().split('/').slice(1).join('/'));
   const files = [];
 
   const rows = $('table').find('tr').toArray();
