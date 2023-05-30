@@ -11,7 +11,7 @@
     "cheerio": "^1.0.0-rc.10"
   },
   "devDependencies": {
-    "semistandard": "^16.0.1",
+    "semistandard": "^17.0.0",
     "test": "^3.0.1"
   }
 }
